@@ -3,7 +3,9 @@
 ## **Project Overview**
 
 Robin, a junior data scientist and amateur astronomer, hopes to one day work for NASA. In her free time she likes to scour the web for information about space travel. One day, a thought occured to Robin: "Why not create a web application to gather all the information for me?". In order to accomplish this Robin will need to blend together web scraping and NoSQL storage. Robin will then be able to pull all the information she needs at the click of a button. 
-      ![alt_text](https://github.com/nguyenauloi/Mission-to-Mars/blob/main/Mars_Scraping/resources/nasa_mars_travel_poster.jpg "nasa_mars_travel_poster.jpg")
+
+<img src="https://github.com/nguyenauloi/Mission-to-Mars/blob/main/Mars_Scraping/resources/nasa_mars_travel_poster.jpg" width="250">
+
 Robin will be gathering information from the following websites:
 - https://redplanetscience.com
 - https://spaceimages-mars.com
