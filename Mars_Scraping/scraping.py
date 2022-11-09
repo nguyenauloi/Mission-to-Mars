@@ -13,6 +13,7 @@ def scrape_all():
 
     # Set news title and paragraph varaibles
     news_title, news_paragraph = mars_news(browser)
+    hemisphere_results = hemispheres(browser)
 
     # Create a data dictionary
     # Run all scraping functions and store results in dictonary
@@ -22,7 +23,7 @@ def scrape_all():
             "featured_image": featured_image(browser),
             "facts": mars_facts(),
             "last_modified": dt.datetime.now(),
-            "hemisphere_images": hemisphere_images(browser)
+            "hemispheres": hemisphere_results,
     }
 
     # Stop webdriver
@@ -64,7 +65,7 @@ def mars_news(browser):
         news_title = slide_elem.find('div', class_='content_title').get_text()
         # Use the parent element to find the paragraph text
         news_p = slide_elem.find('div', class_='article_teaser_body').get_text()
-    
+
     except AttributeError:
         return None, None
 
@@ -77,20 +78,20 @@ def featured_image(browser):
     # Visit URL
     url = 'https://spaceimages-mars.com'
     browser.visit(url)
-    
+
     # Find and click the full image button
     full_image_elem = browser.find_by_tag('button')[1]
     full_image_elem.click()
-    
+
     # Parse the resulting html with soup
     html = browser.html
     img_soup = soup(html, 'html.parser')
-    
+
     # Add a try/except for error handling
     try:
         # find the relative image url
         img_url_rel = img_soup.find('img', class_='fancybox-image').get('src')
-    
+
     except AttributeError:
         return None
 
@@ -106,10 +107,10 @@ def mars_facts():
     try:
         # Use 'read_html' to scrape the facts table into a dataframe
         df = pd.read_html('https://galaxyfacts-mars.com')[0]
-    
+
     except BaseException:
         return None
-    
+
     # Assign columns and set index of dataframe
     df.columns=['Description', 'Mars', 'Earth']
     df.set_index('Description', inplace=True)
@@ -118,34 +119,40 @@ def mars_facts():
     return df.to_html()
 
 # ## Hemisphere
-def hemisphere_images():
+def hemispheres(browser):
 
     # Visit URL
-    url = 'https://marshemispheres.com'
+    url = 'https://marshemispheres.com/'
     browser.visit(url)
-    
-    hemisphere_image_urls = []
 
-    for hemispheres in range(4):
-        # Click through each link
-        browser.links.find_by_partial_text('Hemisphere')[hemispheres].click()
-    
-        # Parse
-        html = browser.html
-        hemisphere_soup = soup(html, 'html.parser')
-    
-        # Scrape
-        title = hemisphere_soup.find('h2', class_='title').text
-        img_url = hemisphere_soup.find('li').a.get('href')
-    
-        # Dictionary
-        hemisphere_content = {}
-        hemisphere_content['title']=title
-        hemisphere_content['img_url']= f'https://marshemispheres.com/{img_url}'
-    
-        # Append into list
-        hemisphere_image_urls.append(hemisphere_content)
-        browser.back()
+    # List to hold the images
+    hemisphere_image_urls = []
+    try:
+        
+        for hemispheres in range(4):
+            
+            # Click through each link
+            browser.links.find_by_partial_text('Hemisphere')[hemispheres].click()
+
+            # Parse
+            html = browser.html
+            hemisphere_soup = soup(html, 'html.parser')
+
+            # Scrape
+            title = hemisphere_soup.find('h2', class_='title').text
+            img_url = hemisphere_soup.find('li').a.get('href')
+
+            # Dictionary
+            hemisphere_content = {}
+            hemisphere_content['title']=title
+            hemisphere_content['img_url']= f'https://marshemispheres.com/{img_url}'
+
+            # Append into list
+            hemisphere_image_urls.append(hemisphere_content)
+            browser.back()
+
+    except AttributeError:
+        return None
 
     return hemisphere_image_urls
 

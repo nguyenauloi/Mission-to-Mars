@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, 
+                                  initial-scale=1, 
+                                  maximum-scale=1, 
+                                  user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mission to Mars</title>
     <link
@@ -10,13 +13,30 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
   </head>
+
+  <style>
+    body {
+      background-image: url('https://cdnb.artstation.com/p/assets/images/images/031/826/785/medium/grace-s-marsbg-banner.jpg?1604691024');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-color: rgba(255,255,255,0.2);
+      background-blend-mode: lighten;
+    }
+
+    h2 {
+      color: white;
+      background-color: rgba(178,34,34,0.8); 
+    }
+  </style>
+
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <!-- Add Jumbotron to Header -->
-      <div class="jumbotron text-center">
+      <div class="jumbotron text-center" style="box-shadow: 10px 10px;">
         <h1>Mission to Mars</h1>
         <!-- Add a button to activate scraping script -->
-        <p><a class="btn btn-primary btn-lg" href="Mission-to-Mars/Mars_Scraping/scraping.py" role="button">Scrape New Data</a></p>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" style="background-color: rgba(178,34,34,0.8);" role="button">Scrape New Data</a></p>
       </div>
 
       <!-- Add section for Mars News -->
