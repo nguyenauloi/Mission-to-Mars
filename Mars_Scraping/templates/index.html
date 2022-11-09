@@ -16,13 +16,19 @@
 
   <style>
     body {
-      background-image: url('https://cdnb.artstation.com/p/assets/images/images/031/826/785/medium/grace-s-marsbg-banner.jpg?1604691024');
+      background-image: url('https://i.pinimg.com/originals/74/1c/fa/741cfa5204b25d35f128378106dd2f90.jpg');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
       background-color: rgba(255,255,255,0.2);
       background-blend-mode: lighten;
     }
+    .jumbotron{background: url('https://i.ebayimg.com/images/g/TbYAAOSwJTta0yfH/s-l1600.jpg');}
+    .jumbotron{background-size: cover;}
+    .jumbotron h1 {font-family: "Lucida Console"; text-shadow: 2px 2px white; border 1px solid black; line-height: 500px;}
+    .jumbotron a:link {background-color:rgba(178,34,34,0.8); border-color: black; border-radius: 10% / 50%;}
+    .jumbotron a:hover, 
+    .jumbotron a:active {background-color: black; border-style: dotted; border-color: white;}
 
     h2 {
       color: white;
@@ -79,7 +85,6 @@
         <div class="page-header">
           <h2 class="text-center">Mars Hemispheres</h2>
         </div>
-
         {% for hemisphere in mars.hemispheres %}
         <div class="col-md-6">
           <div class="thumbnail">
